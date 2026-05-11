@@ -1,9 +1,6 @@
 # An AI system to help scientists write expert-level empirical software (ERA)
 
 This repository contains the code associated with the paper:
-**[An AI system to help scientists write expert-level empirical software](https://arxiv.org/abs/2509.06503)** (Ayg# An AI system to help scientists write expert-level empirical software (ERA)
-
-This repository contains the code associated with the paper:
 **[An AI system to help scientists write expert-level empirical software](https://arxiv.org/abs/2509.06503)** (Aygun, et al., 2025).
 
 ## Overview
