@@ -65,6 +65,14 @@ functions:
 The search iterates `num_iterations` times, expanding a search tree one node at
 a time using the Flat UCB (PUCT) algorithm, and returns the best solution found.
 
+### Example Task Notebooks
+
+The `implementation/notebooks/` directory contains example task notebooks from
+our evaluation benchmark, on two scientific tasks.
+See [`implementation/notebooks/README.md`](implementation/notebooks/README.md)
+for details.
+
+
 ## Citing This Work
 
 If you find this helpful in your work or use the code or data in this package, please cite:
