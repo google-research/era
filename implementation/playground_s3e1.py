@@ -161,7 +161,7 @@ def wrapper(unused_arg):
 """
         final_program = full_program + wrapper_code
         
-        result, success = self.sandbox.run(final_program, "wrapper", None)
+        result, success = self.sandbox.run(final_program, "wrapper", None, timeout_seconds=60)
         
         if not success or result is None:
             print(f"Execution failed: {result}")
