@@ -125,9 +125,10 @@ IMPORTANT CONSTRAINTS FOR SPEED:
         return futs.Solution(code)
 
 class PlaygroundExecutor:
-    def __init__(self, sandbox: Sandbox, y_true: np.ndarray):
+    def __init__(self, sandbox: Sandbox, y_true: np.ndarray, timeout_seconds: int = 60):
         self.sandbox = sandbox
         self.y_true = y_true
+        self.timeout_seconds = timeout_seconds
 
     def __call__(self, problem: futs.Problem, solution: futs.Solution) -> float:
         # ... (setup code remains similar)
@@ -161,7 +162,7 @@ def wrapper(unused_arg):
 """
         final_program = full_program + wrapper_code
         
-        result, success = self.sandbox.run(final_program, "wrapper", None)
+        result, success = self.sandbox.run(final_program, "wrapper", "None", self.timeout_seconds)
         
         if not success or result is None:
             print(f"Execution failed: {result}")
@@ -195,7 +196,9 @@ def run_experiment(iterations=10):
     y_val = prepare_data()
 
     llm = GeminiLLM(api_key)
-    sandbox = Sandbox(timeout_seconds=60) # Give it time to train
+    # `timeout_seconds` is a per-run argument on Sandbox.run(), not a constructor
+    # argument. Plug in your own concrete Sandbox implementation here.
+    sandbox = Sandbox()
     
     problem = PlaygroundProblem("Improve the regression model for the California Housing dataset.")
     
@@ -220,7 +223,7 @@ def train_and_predict(train_path, test_path):
     initial_solution = futs.Solution(initial_code)
     
     # Evaluate initial
-    executor = PlaygroundExecutor(sandbox, y_val)
+    executor = PlaygroundExecutor(sandbox, y_val, timeout_seconds=60)
     print("Evaluating initial solution...")
     initial_score = executor(problem, initial_solution)
     print(f"Initial Score (Neg RMSE): {initial_score}")
